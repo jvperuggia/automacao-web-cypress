@@ -35,13 +35,13 @@
 
     //tela de login
     function acessarTelaDeLogin(){
-    cy.visit('https://www.automationexercise.com')    
-    cy.get('a[href*=login]').click()
+    cy.visit('/login')    
+    //cy.get('a[href*=login]').click()
     }
 
     //acessar a home
     function acessarHome(){
-    cy.visit('https://www.automationexercise.com')
+    cy.visit('/')
     }
 
     
