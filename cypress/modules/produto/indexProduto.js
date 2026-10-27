@@ -4,7 +4,8 @@
     // ESSA FUNÇÃO USA XPATH PARA PREENCHER CAMPOS DE SENHA, NOME, SOBRENOME E COMPANY
     function acessarProdutos() {
 //       cy.get('.shop-menu > .nav > :nth-child(2) > a').click()
-       cy.xpath('//a[@href="/products"]').click()
+    //   cy.xpath('//a[@href="/products"]').click()
+       cy.visit('/products')
     }
 
     // Função para verificar se Acesso à Produtos foi efetuado com sucesso

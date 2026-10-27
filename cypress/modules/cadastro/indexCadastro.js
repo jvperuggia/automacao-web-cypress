@@ -16,27 +16,26 @@
     // ESSA FUNÇÃO USA XPATH PARA PREENCHER CAMPOS DE SENHA, NOME, SOBRENOME E COMPANY
     function preencherCadastro() {
 
-        cy.get('#id_gender1').check()
-       // usando xpath para preencher o campo de senha
-        cy.xpath('//input[@type="password"]').type('123456')
-        cy.get('[data-qa="days"]').select('13')
-        cy.get('[data-qa="months"]').select('May')
-        cy.get('[data-qa="years"]').select('1990')
-        cy.get('#newsletter').check()
-       //usando xpath para preencher o campo nome
-        cy.xpath('//input[@data-qa="first_name"]').type('Victor')
-       //usando xpath para preencher o campo sobrenome
-        cy.xpath('//input[@data-qa="last_name"]').type('Bragança') 
-       //usando xpath para preencher o campo Company
-        cy.xpath('//input[@data-qa="company"]').type('SOS Micro')
-        cy.get('[data-qa="address"]').type('Rua dos Tombamento, 400')
-        cy.get('[data-qa="country"]').select('Canada')
-        cy.get('[data-qa="state"]').type('Ryo de Janeyrow')
-        cy.get('[data-qa="city"]').type('Nicteroy')
-        cy.get('[data-qa="zipcode"]').type('30528-000')
-        cy.get('[data-qa="mobile_number"]').type('+355 05 99999-9999')
+        cy.fixture('dadosPessoais').then((dadosPessoais) => {
 
-        cy.get('[data-qa="create-account"]').click()
+            cy.get('#id_gender1').check()
+            cy.xpath('//input[@type="password"]').type(dadosPessoais.senha)
+            cy.get('[data-qa="days"]').select(dadosPessoais.dia)
+            cy.get('[data-qa="months"]').select(dadosPessoais.mes)
+            cy.get('[data-qa="years"]').select(dadosPessoais.ano)
+            cy.get('#newsletter').check()
+            cy.xpath('//input[@data-qa="first_name"]').type(dadosPessoais.nome)
+            cy.xpath('//input[@data-qa="last_name"]').type(dadosPessoais.sobrenome)
+            cy.xpath('//input[@data-qa="company"]').type(dadosPessoais.empresa)
+            cy.get('[data-qa="address"]').type(dadosPessoais.endereco)
+            cy.get('[data-qa="country"]').select(dadosPessoais.pais)
+            cy.get('[data-qa="state"]').type(dadosPessoais.estado)
+            cy.get('[data-qa="city"]').type(dadosPessoais.cidade)
+            cy.get('[data-qa="zipcode"]').type(dadosPessoais.cep)
+            cy.get('[data-qa="mobile_number"]').type(dadosPessoais.telefone)
+
+            cy.get('[data-qa="create-account"]').click()
+        })
     }
 
     // Função para verificar se o cadastro foi efetuado com sucesso
@@ -89,40 +88,35 @@
             email: `${timestamp}@${gerarQuatroLetras()}.com`,
             senha: '123456'
         }
-
-        cy.visit('https://www.automationexercise.com')
-       //tela de cadastro
-        cy.get('a[href*=login]').click()
-
+        
+        //tela de cadastro
+        cy.visit('/login')
         cy.get('[data-qa="signup-name"]').type('Victor Bragança')
         cy.get('[data-qa="signup-email"]').type(usuario.email)
        //usando xpath para clicar no botão de cadastro
         cy.xpath('//button[@data-qa="signup-button"]').click()
-        
 
 
+        cy.fixture('dadosPessoais').then((dadosPessoais) => {
 
-        cy.get('#id_gender1').check()
-       // usando xpath para preencher o campo de senha
-        cy.xpath('//input[@type="password"]').type(usuario.senha)
-        cy.get('[data-qa="days"]').select('13')
-        cy.get('[data-qa="months"]').select('May')
-        cy.get('[data-qa="years"]').select('1990')
-        cy.get('#newsletter').check()
-       //usando xpath para preencher o campo nome
-        cy.xpath('//input[@data-qa="first_name"]').type('Victor')
-       //usando xpath para preencher o campo sobrenome
-        cy.xpath('//input[@data-qa="last_name"]').type('Bragança') 
-       //usando xpath para preencher o campo Company
-        cy.xpath('//input[@data-qa="company"]').type('SOS Micro')
-        cy.get('[data-qa="address"]').type('Rua dos Tombamento, 400')
-        cy.get('[data-qa="country"]').select('Canada')
-        cy.get('[data-qa="state"]').type('Ryo de Janeyrow')
-        cy.get('[data-qa="city"]').type('Nicteroy')
-        cy.get('[data-qa="zipcode"]').type('30528-000')
-        cy.get('[data-qa="mobile_number"]').type('+355 05 99999-9999')
-        //criar conta
-        cy.get('[data-qa="create-account"]').click()
+            cy.get('#id_gender1').check()
+            cy.xpath('//input[@type="password"]').type(dadosPessoais.senha)
+            cy.get('[data-qa="days"]').select(dadosPessoais.dia)
+            cy.get('[data-qa="months"]').select(dadosPessoais.mes)
+            cy.get('[data-qa="years"]').select(dadosPessoais.ano)
+            cy.get('#newsletter').check()
+            cy.xpath('//input[@data-qa="first_name"]').type(dadosPessoais.nome)
+            cy.xpath('//input[@data-qa="last_name"]').type(dadosPessoais.sobrenome)
+            cy.xpath('//input[@data-qa="company"]').type(dadosPessoais.empresa)
+            cy.get('[data-qa="address"]').type(dadosPessoais.endereco)
+            cy.get('[data-qa="country"]').select(dadosPessoais.pais)
+            cy.get('[data-qa="state"]').type(dadosPessoais.estado)
+            cy.get('[data-qa="city"]').type(dadosPessoais.cidade)
+            cy.get('[data-qa="zipcode"]').type(dadosPessoais.cep)
+            cy.get('[data-qa="mobile_number"]').type(dadosPessoais.telefone)
+
+            cy.get('[data-qa="create-account"]').click()
+        })
         //continue
         cy.get('[data-qa="continue-button"]').click()
         //retornar dados de usuário para realização do login
