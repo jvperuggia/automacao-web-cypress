@@ -6,6 +6,17 @@ module.exports = defineConfig({
     runMode: 2, // headless
   },
   reporter: 'cypress-mochawesome-reporter',
+  
+  reporterOptions: {
+    reportDir: 'cypress/reports',
+    overwrite: false,
+    html: true,
+    json: true,
+    charts: true,
+    embeddedScreenshots: true,
+    inlineAssets: true
+  },
+
   e2e: {
     baseUrl: `https://www.automationexercise.com`,
 
@@ -16,6 +27,8 @@ module.exports = defineConfig({
     watchForFileChanges: false,
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
+
+      return config
     },
   },
 });
