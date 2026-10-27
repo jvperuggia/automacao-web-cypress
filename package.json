@@ -1,12 +1,19 @@
 {
   "name": "automacaoweb",
   "version": "1.0.0",
-  "description": "",
+  "description": "Automação web com Cypress",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:headless": "cypress run --headless"
   },
-  "keywords": [],
+  "keywords": [
+    "cypress",
+    "automacao",
+    "teste"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
